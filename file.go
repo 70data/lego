@@ -3,6 +3,7 @@ package utils
 import (
 	"bufio"
 	"io"
+	"log"
 	"os"
 	"strings"
 )
@@ -13,11 +14,11 @@ func OverlapWriteFile(fileName, fileData string) {
 	os.MkdirAll(strings.Trim(fileName, dirPathSlice[len(dirPathSlice)-1]), 0755)
 	f, fErr := os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0777)
 	if fErr != nil {
-		ErrorLogger(fErr)
+		log.Println(fErr)
 	}
 	_, wErr := f.WriteString(fileData)
 	if wErr != nil {
-		ErrorLogger(wErr)
+		log.Println(wErr)
 	}
 	f.Sync()
 	f.Close()
@@ -27,12 +28,12 @@ func OverlapWriteFile(fileName, fileData string) {
 func MergeFile(oldFile, newFile string) {
 	fo, foErr := os.OpenFile(oldFile, os.O_RDWR|os.O_APPEND, 0777)
 	if foErr != nil {
-		ErrorLogger(foErr)
+		log.Println(foErr)
 	}
 	// open new file
 	fn, fnErr := os.Open(newFile)
 	if fnErr != nil {
-		ErrorLogger(fnErr)
+		log.Println(fnErr)
 	}
 	// read new file
 	rd := bufio.NewReader(fn)
@@ -45,7 +46,7 @@ func MergeFile(oldFile, newFile string) {
 		// write old file
 		_, fwErr := fo.WriteString(oneDoc)
 		if fwErr != nil {
-			ErrorLogger(fwErr)
+			log.Println(fwErr)
 		}
 	}
 	// clone new file
@@ -60,7 +61,7 @@ func MergeFile(oldFile, newFile string) {
 func DeleteFile(fileName string) {
 	err := os.Remove(fileName)
 	if err != nil {
-		ErrorLogger(err)
+		log.Println(err)
 	}
 }
 
@@ -68,6 +69,6 @@ func DeleteFile(fileName string) {
 func DeleteDir(dirPath string) {
 	err := os.RemoveAll(dirPath)
 	if err != nil {
-		ErrorLogger(err)
+		log.Println(err)
 	}
 }

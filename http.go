@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -24,13 +25,13 @@ func HTTPGetReturnByte(reqURL string, header map[string]string) []byte {
 	}
 	res, perr := c.Do(req)
 	if perr != nil {
-		ErrorLogger(perr)
+		log.Println(perr)
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
 	res.Body.Close()
 	if berr != nil {
-		ErrorLogger(berr)
+		log.Println(berr)
 	}
 	return resBody
 }
@@ -47,13 +48,13 @@ func HTTPGet(reqURL string) map[string]interface{} {
 	}
 	res, perr := c.Do(req)
 	if perr != nil {
-		ErrorLogger(perr)
+		log.Println(perr)
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
 	res.Body.Close()
 	if berr != nil {
-		ErrorLogger(berr)
+		log.Println(berr)
 	}
 	responeDate := make(map[string]interface{})
 	json.Unmarshal(resBody, &responeDate)
@@ -69,13 +70,13 @@ func HTTPPost(reqURL, reqData string) map[string]interface{} {
 	}
 	res, perr := c.Do(req)
 	if perr != nil {
-		ErrorLogger(perr)
+		log.Println(perr)
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
 	res.Body.Close()
 	if berr != nil {
-		ErrorLogger(berr)
+		log.Println(berr)
 	}
 	responeDate := make(map[string]interface{})
 	json.Unmarshal(resBody, &responeDate)
@@ -98,13 +99,13 @@ func HTTPSaltPost(reqURL, reqData string) map[string]interface{} {
 	}
 	res, perr := c.Do(req)
 	if perr != nil {
-		ErrorLogger(perr)
+		log.Println(perr)
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
 	res.Body.Close()
 	if berr != nil {
-		ErrorLogger(berr)
+		log.Println(berr)
 	}
 	responeDate := make(map[string]interface{})
 	json.Unmarshal(resBody, &responeDate)
@@ -120,13 +121,13 @@ func HTTPPut(reqURL, reqData string) map[string]interface{} {
 	}
 	res, perr := c.Do(req)
 	if perr != nil {
-		ErrorLogger(perr)
+		log.Println(perr)
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
 	res.Body.Close()
 	if berr != nil {
-		ErrorLogger(berr)
+		log.Println(berr)
 	}
 	responeDate := make(map[string]interface{})
 	json.Unmarshal(resBody, &responeDate)
@@ -141,13 +142,13 @@ func HTTPDelete(reqURL, reqData string) map[string]interface{} {
 	}
 	res, perr := c.Do(req)
 	if perr != nil {
-		ErrorLogger(perr)
+		log.Println(perr)
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
 	res.Body.Close()
 	if berr != nil {
-		ErrorLogger(berr)
+		log.Println(berr)
 	}
 	responeDate := make(map[string]interface{})
 	json.Unmarshal(resBody, &responeDate)

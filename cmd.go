@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"log"
 	"os/exec"
 )
 
@@ -9,6 +10,6 @@ func RunCmd(cmdInfo string) {
 	cmd := exec.Command("/bin/bash", "-c", cmdInfo)
 	err := cmd.Run()
 	if err != nil {
-		ErrorLogger(err)
+		log.Println(err)
 	}
 }
