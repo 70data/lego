@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"log"
 	"net"
 	"strings"
 )
@@ -15,5 +16,5 @@ func GetIP() {
 		panic(err)
 	}
 	LoatlIP = strings.Split(addrs[1].String(), "/")[0]
-	CustomLogger("local ip:", LoatlIP)
+	log.Println("local ip:", LoatlIP)
 }

@@ -42,7 +42,7 @@ func MergeFile(oldFile, newFile string) {
 		if err != nil || io.EOF == err {
 			break
 		}
-		CustomLogger("doc info:", oneDoc)
+		log.Println("doc info:", oneDoc)
 		// write old file
 		_, fwErr := fo.WriteString(oneDoc)
 		if fwErr != nil {
