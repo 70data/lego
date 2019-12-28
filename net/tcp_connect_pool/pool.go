@@ -1,4 +1,4 @@
-package tcp_connect_pool
+package net
 
 import (
 	"fmt"
