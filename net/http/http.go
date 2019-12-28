@@ -1,4 +1,4 @@
-package utils
+package net
 
 import (
 	"crypto/tls"
@@ -8,6 +8,9 @@ import (
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/70data/utils/safe"
+	myTime "github.com/70data/utils/time"
 )
 
 // HTTPGetReturnByte compatible http & https return byte with custom header
@@ -29,7 +32,7 @@ func HTTPGetReturnByte(reqURL string, header map[string]string) []byte {
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
-	res.Body.Close()
+	_ = res.Body.Close()
 	if berr != nil {
 		log.Println(berr)
 	}
@@ -52,12 +55,12 @@ func HTTPGet(reqURL string) map[string]interface{} {
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
-	res.Body.Close()
+	_ = res.Body.Close()
 	if berr != nil {
 		log.Println(berr)
 	}
 	responeDate := make(map[string]interface{})
-	json.Unmarshal(resBody, &responeDate)
+	_ = json.Unmarshal(resBody, &responeDate)
 	return responeDate
 }
 
@@ -74,12 +77,12 @@ func HTTPPost(reqURL, reqData string) map[string]interface{} {
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
-	res.Body.Close()
+	_ = res.Body.Close()
 	if berr != nil {
 		log.Println(berr)
 	}
 	responeDate := make(map[string]interface{})
-	json.Unmarshal(resBody, &responeDate)
+	_ = json.Unmarshal(resBody, &responeDate)
 	return responeDate
 }
 
@@ -88,11 +91,11 @@ func HTTPSaltPost(reqURL, reqData string) map[string]interface{} {
 	req, _ := http.NewRequest("POST", reqURL, strings.NewReader(reqData))
 	req.Header.Set("Content-Type", "application/json")
 	// make salt
-	timeNow := TimeUnix()
+	timeNow := myTime.Unix()
 	req.Header.Set("NXOS-ts", timeNow)
-	bodyMD := MakeMD(reqData)
+	bodyMD := safe.MakeMD(reqData)
 	tokenNaive := bodyMD + timeNow
-	bodyToken := MakeMD(tokenNaive)
+	bodyToken := safe.MakeMD(tokenNaive)
 	req.Header.Set("NXOS-token", bodyToken)
 	c := &http.Client{
 		Timeout: 300 * time.Second,
@@ -103,12 +106,12 @@ func HTTPSaltPost(reqURL, reqData string) map[string]interface{} {
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
-	res.Body.Close()
+	_ = res.Body.Close()
 	if berr != nil {
 		log.Println(berr)
 	}
 	responeDate := make(map[string]interface{})
-	json.Unmarshal(resBody, &responeDate)
+	_ = json.Unmarshal(resBody, &responeDate)
 	return responeDate
 }
 
@@ -125,12 +128,12 @@ func HTTPPut(reqURL, reqData string) map[string]interface{} {
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
-	res.Body.Close()
+	_ = res.Body.Close()
 	if berr != nil {
 		log.Println(berr)
 	}
 	responeDate := make(map[string]interface{})
-	json.Unmarshal(resBody, &responeDate)
+	_ = json.Unmarshal(resBody, &responeDate)
 	return responeDate
 }
 
@@ -146,11 +149,11 @@ func HTTPDelete(reqURL, reqData string) map[string]interface{} {
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
-	res.Body.Close()
+	_ = res.Body.Close()
 	if berr != nil {
 		log.Println(berr)
 	}
 	responeDate := make(map[string]interface{})
-	json.Unmarshal(resBody, &responeDate)
+	_ = json.Unmarshal(resBody, &responeDate)
 	return responeDate
 }

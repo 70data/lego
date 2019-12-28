@@ -1,12 +1,12 @@
-package utils
+package time
 
 import (
 	"strconv"
 	"time"
 )
 
-// TimeUnix is time for unix
-func TimeUnix() string {
+// Unix is time for unix
+func Unix() string {
 	naiveTime := time.Now().Unix()
 	naiveTimeString := strconv.FormatInt(naiveTime, 10)
 	return naiveTimeString

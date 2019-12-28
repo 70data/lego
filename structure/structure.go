@@ -1,4 +1,4 @@
-package utils
+package structure
 
 import (
 	"regexp"
@@ -6,7 +6,7 @@ import (
 
 func removeRepByLoop(slc []string) []string {
 	// mark data
-	result := []string{}
+	var result []string
 	for i := range slc {
 		// find \s
 		reg := regexp.MustCompile(`[^s]+`)
@@ -30,7 +30,7 @@ func removeRepByLoop(slc []string) []string {
 }
 
 func removeRepByMap(slc []string) []string {
-	result := []string{}
+	var result []string
 	// mark data
 	tempMap := map[string]byte{}
 	for _, e := range slc {

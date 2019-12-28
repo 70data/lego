@@ -1,10 +1,10 @@
-package utils
+package distribution
 
 import (
 	"fmt"
 	"strings"
 
-	uuid "github.com/satori/go.uuid"
+	"github.com/satori/go.uuid"
 )
 
 // GetUUID is name uuid func

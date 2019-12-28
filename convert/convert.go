@@ -1,4 +1,4 @@
-package utils
+package convert
 
 import (
 	"strconv"
@@ -17,7 +17,7 @@ func StringArrayToString(naiveArray []string) string {
 	return naiveList
 }
 
-func U2S(us []uint8) string {
+func Uint8ToString(us []uint8) string {
 	var str []string
 	var target string
 	for _, b := range us {

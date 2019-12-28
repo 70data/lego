@@ -1,4 +1,4 @@
-package utils
+package math
 
 import (
 	"math/rand"
@@ -17,7 +17,7 @@ func GenerateRandomNumber(start int, end int, count int) []int {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	for len(nums) < count {
 		// make random number
-		num := r.Intn((end - start)) + start
+		num := r.Intn(end - start) + start
 		// check repeat
 		exist := false
 		for _, v := range nums {

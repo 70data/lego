@@ -1,4 +1,4 @@
-package utils
+package os
 
 import (
 	"bufio"
@@ -11,7 +11,7 @@ import (
 // OverlapWriteFile is overlap write data to file once
 func OverlapWriteFile(fileName, fileData string) {
 	dirPathSlice := strings.Split(fileName, "/")
-	os.MkdirAll(strings.Trim(fileName, dirPathSlice[len(dirPathSlice)-1]), 0755)
+	_ = os.MkdirAll(strings.Trim(fileName, dirPathSlice[len(dirPathSlice)-1]), 0755)
 	f, fErr := os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0777)
 	if fErr != nil {
 		log.Println(fErr)
@@ -20,8 +20,8 @@ func OverlapWriteFile(fileName, fileData string) {
 	if wErr != nil {
 		log.Println(wErr)
 	}
-	f.Sync()
-	f.Close()
+	_ = f.Sync()
+	_ = f.Close()
 }
 
 // MergeFile is merge file
@@ -50,11 +50,11 @@ func MergeFile(oldFile, newFile string) {
 		}
 	}
 	// clone new file
-	fn.Close()
+	_ = fn.Close()
 	// sync old file
-	fo.Sync()
+	_ = fo.Sync()
 	// close old file
-	fo.Close()
+	_ = fo.Close()
 }
 
 // DeleteFile is delete file
