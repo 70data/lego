@@ -6,8 +6,8 @@ import (
 	"strings"
 )
 
-// LoatlIP is make local ip
-var LoatlIP string
+// LocalIP is make local ip
+var LocalIP string
 
 // GetIP is get local ip
 func GetIP() {
@@ -15,6 +15,6 @@ func GetIP() {
 	if err != nil {
 		panic(err)
 	}
-	LoatlIP = strings.Split(addrs[1].String(), "/")[0]
-	log.Println("local ip:", LoatlIP)
+	LocalIP = strings.Split(addrs[1].String(), "/")[0]
+	log.Println("local ip:", LocalIP)
 }
