@@ -8,7 +8,6 @@ import (
 	"strings"
 )
 
-// OverlapWriteFile is overlap write data to file once
 func OverlapWriteFile(fileName, fileData string) {
 	dirPathSlice := strings.Split(fileName, "/")
 	_ = os.MkdirAll(strings.Trim(fileName, dirPathSlice[len(dirPathSlice)-1]), 0755)
@@ -24,7 +23,6 @@ func OverlapWriteFile(fileName, fileData string) {
 	_ = f.Close()
 }
 
-// MergeFile is merge file
 func MergeFile(oldFile, newFile string) {
 	fo, foErr := os.OpenFile(oldFile, os.O_RDWR|os.O_APPEND, 0777)
 	if foErr != nil {
@@ -57,7 +55,6 @@ func MergeFile(oldFile, newFile string) {
 	_ = fo.Close()
 }
 
-// DeleteFile is delete file
 func DeleteFile(fileName string) {
 	err := os.Remove(fileName)
 	if err != nil {
@@ -65,7 +62,6 @@ func DeleteFile(fileName string) {
 	}
 }
 
-// DeleteDir is delete dir
 func DeleteDir(dirPath string) {
 	err := os.RemoveAll(dirPath)
 	if err != nil {

@@ -49,7 +49,6 @@ func removeRepByMap(slc []string) []string {
 	return result
 }
 
-// RemoveDuplicatesAndEmpty is delete duplicate data from slice.
 func RemoveDuplicatesAndEmpty(slc []string) []string {
 	// < 1024 use slice
 	if len(slc) < 1024 {

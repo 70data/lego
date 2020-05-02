@@ -5,9 +5,8 @@ import (
 	"os/exec"
 )
 
-// RunCmd is run simple cmd
-func RunCmd(cmdInfo string) {
-	cmd := exec.Command("/bin/bash", "-c", cmdInfo)
+func RunCmd(command string) {
+	cmd := exec.Command("/bin/bash", "-c", command)
 	err := cmd.Run()
 	if err != nil {
 		log.Println(err)

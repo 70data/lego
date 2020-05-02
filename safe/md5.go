@@ -5,7 +5,6 @@ import (
 	"encoding/hex"
 )
 
-// MakeMD is make string md5
 func MakeMD(initString string) string {
 	m := md5.New()
 	m.Write([]byte(initString))

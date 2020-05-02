@@ -22,7 +22,7 @@ type DomainInfo struct {
 // query server const
 const (
 	DomainWhoisServer = "whois-servers.net"
-	Port         = "43"
+	Port              = "43"
 )
 
 // whois do the whois query and returns whois info
@@ -61,11 +61,11 @@ func Query(domain string) (result DomainInfo, err error) {
 		err = e
 		return
 	}
-	defer conn.Close()
 	_, _ = conn.Write([]byte(domain + "\r\n"))
 	_ = conn.SetReadDeadline(time.Now().Add(time.Second * 30))
 	// get result
 	buffer, e := ioutil.ReadAll(conn)
+	conn.Close()
 	if e != nil {
 		err = e
 		return
