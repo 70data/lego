@@ -34,11 +34,7 @@ func HTTPGET(reqURL string) []byte {
 
 func HTTPPOST(reqURL, reqType, reqData string) map[string]interface{} {
 	req, _ := http.NewRequest("POST", reqURL, strings.NewReader(reqData))
-	if reqType == "url" {
-		req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-	} else {
-		req.Header.Add("Content-Type", "application/json")
-	}
+	req.Header.Add("Content-Type", "application/json")
 	c := &http.Client{
 		Timeout: 10 * time.Second,
 	}
@@ -60,11 +56,7 @@ func HTTPPOST(reqURL, reqType, reqData string) map[string]interface{} {
 
 func HTTPPUT(reqURL, reqType, reqData string) map[string]interface{} {
 	req, _ := http.NewRequest("PUT", reqURL, strings.NewReader(reqData))
-	if reqType == "url" {
-		req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-	} else {
-		req.Header.Add("Content-Type", "application/json")
-	}
+	req.Header.Add("Content-Type", "application/json")
 	c := &http.Client{
 		Timeout: 10 * time.Second,
 	}
