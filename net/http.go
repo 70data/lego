@@ -32,7 +32,7 @@ func HTTPGET(reqURL string) []byte {
 	return resBody
 }
 
-func HTTPPOST(reqURL, reqType, reqData string) map[string]interface{} {
+func HTTPPOST(reqURL, reqData string) map[string]interface{} {
 	req, _ := http.NewRequest("POST", reqURL, strings.NewReader(reqData))
 	req.Header.Add("Content-Type", "application/json")
 	c := &http.Client{
@@ -54,7 +54,7 @@ func HTTPPOST(reqURL, reqType, reqData string) map[string]interface{} {
 	return responeDate
 }
 
-func HTTPPUT(reqURL, reqType, reqData string) map[string]interface{} {
+func HTTPPUT(reqURL, reqData string) map[string]interface{} {
 	req, _ := http.NewRequest("PUT", reqURL, strings.NewReader(reqData))
 	req.Header.Add("Content-Type", "application/json")
 	c := &http.Client{
