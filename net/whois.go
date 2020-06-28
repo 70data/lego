@@ -65,7 +65,7 @@ func Query(domain string) (result DomainInfo, err error) {
 	_ = conn.SetReadDeadline(time.Now().Add(time.Second * 30))
 	// get result
 	buffer, e := ioutil.ReadAll(conn)
-	conn.Close()
+	_ = conn.Close()
 	if e != nil {
 		err = e
 		return
