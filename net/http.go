@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func HTTPGET(reqURL string) []byte {
+func HTTPGET(reqURL string) map[string]interface{} {
 	req, _ := http.NewRequest("GET", reqURL, nil)
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
@@ -29,7 +29,9 @@ func HTTPGET(reqURL string) []byte {
 	if berr != nil {
 		log.Println(berr)
 	}
-	return resBody
+	responeDate := make(map[string]interface{})
+	_ = json.Unmarshal(resBody, &responeDate)
+	return responeDate
 }
 
 func HTTPPOST(reqURL, reqData string) map[string]interface{} {

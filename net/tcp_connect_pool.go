@@ -7,10 +7,9 @@ import (
 	"time"
 )
 
+var globalTimeOut time.Duration
 var effectiveConns chan net.Conn
 var retryConns chan string
-
-var globalTimeOut time.Duration
 
 func InitConnectPool(servList []string, timeOut time.Duration, minConnNum int) {
 	globalTimeOut = timeOut

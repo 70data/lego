@@ -5,7 +5,7 @@ import (
 	"encoding/hex"
 )
 
-func MakeMD(initString string) string {
+func Makemd5(initString string) string {
 	m := md5.New()
 	m.Write([]byte(initString))
 	md := m.Sum(nil)
