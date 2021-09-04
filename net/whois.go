@@ -25,7 +25,6 @@ const (
 	Port              = "43"
 )
 
-// whois do the whois query and returns whois info
 func Whois(domain string) (result DomainInfo, err error) {
 	// trim domain
 	domainSlice := strings.Split(domain, ".")
@@ -50,7 +49,6 @@ func Whois(domain string) (result DomainInfo, err error) {
 	return
 }
 
-// query do the query
 func Query(domain string) (result DomainInfo, err error) {
 	// join domain server
 	domainSlice := strings.Split(domain, ".")

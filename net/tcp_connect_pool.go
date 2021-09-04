@@ -52,12 +52,10 @@ CREATECONN:
 	return conn
 }
 
-// write connect to effective channel
 func Put(conn net.Conn) {
 	effectiveConns <- conn
 }
 
-// write connect to retry channel
 func Drop(conn net.Conn) {
 	retryConns <- fmt.Sprintf("%v", conn.RemoteAddr())
 }
@@ -71,7 +69,6 @@ func Retry() {
 	}
 }
 
-// close tcp connect
 func Close() {
 	for conn := range effectiveConns {
 		_ = conn.Close()
