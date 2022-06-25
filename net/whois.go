@@ -3,10 +3,11 @@ package net
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net"
 	"strings"
 	"time"
+
+	"k8s.io/klog/v2"
 )
 
 type DomainInfo struct {
@@ -29,16 +30,16 @@ func Whois(domain string) (result DomainInfo, err error) {
 	// trim domain
 	domainSlice := strings.Split(domain, ".")
 	if len(domainSlice) < 2 {
-		fmt.Printf("Domain %s is invalid", domain)
+		klog.Infof("Domain %s is invalid", domain)
 		return
 	}
 	if domainSlice[len(domainSlice)-2] == "" {
-		fmt.Printf("Domain %s is invalid", domain)
+		klog.Infof("Domain %s is invalid", domain)
 		return
 	}
 	domain = fmt.Sprintf("%s.%s", domainSlice[len(domainSlice)-2], domainSlice[len(domainSlice)-1])
 	if domain == "" {
-		log.Println("Domain is empty")
+		klog.Infoln("Domain is empty")
 		return
 	}
 	// do query

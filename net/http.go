@@ -4,10 +4,11 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strings"
 	"time"
+
+	"k8s.io/klog/v2"
 )
 
 func HTTPGET(reqURL string) map[string]interface{} {
@@ -21,13 +22,13 @@ func HTTPGET(reqURL string) map[string]interface{} {
 	}
 	res, perr := c.Do(req)
 	if perr != nil {
-		log.Println(perr)
+		klog.Infoln(perr)
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
 	_ = res.Body.Close()
 	if berr != nil {
-		log.Println(berr)
+		klog.Infoln(berr)
 	}
 	responeDate := make(map[string]interface{})
 	_ = json.Unmarshal(resBody, &responeDate)
@@ -42,13 +43,13 @@ func HTTPPOST(reqURL, reqData string) map[string]interface{} {
 	}
 	res, perr := c.Do(req)
 	if perr != nil {
-		log.Println(perr)
+		klog.Infoln(perr)
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
 	_ = res.Body.Close()
 	if berr != nil {
-		log.Println(berr)
+		klog.Infoln(berr)
 		return nil
 	}
 	responeDate := make(map[string]interface{})
@@ -64,13 +65,13 @@ func HTTPPUT(reqURL, reqData string) map[string]interface{} {
 	}
 	res, perr := c.Do(req)
 	if perr != nil {
-		log.Println(perr)
+		klog.Infoln(perr)
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
 	_ = res.Body.Close()
 	if berr != nil {
-		log.Println(berr)
+		klog.Infoln(berr)
 		return nil
 	}
 	responeDate := make(map[string]interface{})
@@ -85,13 +86,13 @@ func HTTPDELETE(reqURL, reqData string) map[string]interface{} {
 	}
 	res, perr := c.Do(req)
 	if perr != nil {
-		log.Println(perr)
+		klog.Infoln(perr)
 		return nil
 	}
 	resBody, berr := ioutil.ReadAll(res.Body)
 	_ = res.Body.Close()
 	if berr != nil {
-		log.Println(berr)
+		klog.Infoln(berr)
 		return nil
 	}
 	responeDate := make(map[string]interface{})

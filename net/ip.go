@@ -1,9 +1,10 @@
 package net
 
 import (
-	"log"
 	"net"
 	"strings"
+
+	"k8s.io/klog/v2"
 )
 
 func GetIP() {
@@ -12,5 +13,5 @@ func GetIP() {
 		panic(err)
 	}
 	localIP := strings.Split(addrs[1].String(), "/")[0]
-	log.Println("local ip:", localIP)
+	klog.Infoln("local ip:", localIP)
 }

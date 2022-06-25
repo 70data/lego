@@ -2,9 +2,10 @@ package net
 
 import (
 	"fmt"
-	"log"
 	"net"
 	"time"
+
+	"k8s.io/klog/v2"
 )
 
 var globalTimeOut time.Duration
@@ -32,11 +33,11 @@ func InitConnectPool(servList []string, timeOut time.Duration, minConnNum int) {
 func connectServer(addr string, globalTimeOut time.Duration) {
 	conn, err := net.DialTimeout("tcp", addr, globalTimeOut*time.Second)
 	if err != nil {
-		log.Println("error connecting", err)
+		klog.Infoln("error connecting", err)
 		// write connect to retry channel
 		retryConns <- addr
 	} else {
-		log.Println("connect to", conn.RemoteAddr())
+		klog.Infoln("connect to", conn.RemoteAddr())
 		// write connect to effective channel
 		effectiveConns <- conn
 	}
@@ -63,7 +64,7 @@ func Drop(conn net.Conn) {
 // Retry tcp connect
 func Retry() {
 	for addr := range retryConns {
-		log.Println(addr)
+		klog.Infoln(addr)
 		connectServer(addr, globalTimeOut)
 		time.Sleep(5 * time.Second)
 	}

@@ -1,11 +1,12 @@
-package os
+package system
 
 import (
 	"bufio"
 	"io"
-	"log"
 	"os"
 	"strings"
+
+	"k8s.io/klog/v2"
 )
 
 func OverlapWriteFile(fileName, fileData string) {
@@ -13,11 +14,11 @@ func OverlapWriteFile(fileName, fileData string) {
 	_ = os.MkdirAll(strings.Trim(fileName, dirPathSlice[len(dirPathSlice)-1]), 0755)
 	f, fErr := os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0777)
 	if fErr != nil {
-		log.Println(fErr)
+		klog.Infoln(fErr)
 	}
 	_, wErr := f.WriteString(fileData)
 	if wErr != nil {
-		log.Println(wErr)
+		klog.Infoln(wErr)
 	}
 	_ = f.Sync()
 	_ = f.Close()
@@ -26,12 +27,12 @@ func OverlapWriteFile(fileName, fileData string) {
 func MergeFile(oldFile, newFile string) {
 	fo, foErr := os.OpenFile(oldFile, os.O_RDWR|os.O_APPEND, 0777)
 	if foErr != nil {
-		log.Println(foErr)
+		klog.Infoln(foErr)
 	}
 	// open new file
 	fn, fnErr := os.Open(newFile)
 	if fnErr != nil {
-		log.Println(fnErr)
+		klog.Infoln(fnErr)
 	}
 	// read new file
 	rd := bufio.NewReader(fn)
@@ -40,11 +41,11 @@ func MergeFile(oldFile, newFile string) {
 		if err != nil || io.EOF == err {
 			break
 		}
-		log.Println("doc info:", oneDoc)
+		klog.Infoln("doc info:", oneDoc)
 		// write old file
 		_, fwErr := fo.WriteString(oneDoc)
 		if fwErr != nil {
-			log.Println(fwErr)
+			klog.Infoln(fwErr)
 		}
 	}
 	// clone new file
@@ -58,13 +59,13 @@ func MergeFile(oldFile, newFile string) {
 func DeleteFile(fileName string) {
 	err := os.Remove(fileName)
 	if err != nil {
-		log.Println(err)
+		klog.Infoln(err)
 	}
 }
 
 func DeleteDir(dirPath string) {
 	err := os.RemoveAll(dirPath)
 	if err != nil {
-		log.Println(err)
+		klog.Infoln(err)
 	}
 }

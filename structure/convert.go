@@ -1,21 +1,9 @@
-package convert
+package structure
 
 import (
 	"strconv"
 	"strings"
 )
-
-func InterfaceArrayToString(naiveArray []interface{}) string {
-	var naiveList string
-	for _, v := range naiveArray {
-		if naiveList == "" {
-			naiveList = v.(string)
-		} else {
-			naiveList = strings.Join([]string{naiveList, v.(string)}, ",")
-		}
-	}
-	return naiveList
-}
 
 func ArrayToString(naiveArray []string) string {
 	var naiveList string
@@ -24,6 +12,18 @@ func ArrayToString(naiveArray []string) string {
 			naiveList = v
 		} else {
 			naiveList = strings.Join([]string{naiveList, v}, ",")
+		}
+	}
+	return naiveList
+}
+
+func InterfaceArrayToString(naiveArray []interface{}) string {
+	var naiveList string
+	for _, v := range naiveArray {
+		if naiveList == "" {
+			naiveList = v.(string)
+		} else {
+			naiveList = strings.Join([]string{naiveList, v.(string)}, ",")
 		}
 	}
 	return naiveList

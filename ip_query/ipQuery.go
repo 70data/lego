@@ -2,12 +2,13 @@ package ipQuery
 
 import (
 	"bufio"
-	"fmt"
 	"math"
 	"os"
 	"regexp"
 	"strconv"
 	"strings"
+
+	"k8s.io/klog/v2"
 )
 
 const (
@@ -28,7 +29,7 @@ var ipInfoArray [2]string
 func LoadIPdata(fileName string) error {
 	f, err := os.Open(fileName)
 	if err != nil {
-		fmt.Println(err)
+		klog.Infoln(err)
 	}
 	buf := bufio.NewReader(f)
 	for i := 0; i < lineNum; i++ {
@@ -48,11 +49,11 @@ func ip2Long(ipstr string) (ip uint32) {
 	r := `^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})`
 	reg, err := regexp.Compile(r)
 	if err != nil {
-		fmt.Println(err)
+		klog.Infoln(err)
 	}
 	ips := reg.FindStringSubmatch(ipstr)
 	if ips == nil {
-		fmt.Println(err)
+		klog.Infoln(err)
 	}
 	ip1, _ := strconv.Atoi(ips[1])
 	ip2, _ := strconv.Atoi(ips[2])
