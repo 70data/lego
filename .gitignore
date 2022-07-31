@@ -1,9 +1,15 @@
 # Mac OS X
 .DS_Store
 
+# ctags
+tags
+
 # IDE
 .idea
 *.out
+*.swp
+*.swo
+*~
 
 # Binaries for programs and plugins
 *.exe
@@ -11,9 +17,14 @@
 *.dll
 *.so
 *.dylib
+bin
+
+# lib & package
+.vendor/
+.glide/
 
 # Test binary
 *.test
+cover.out
+testbin/*
 
-# lib & package
-.glide/
