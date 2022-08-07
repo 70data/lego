@@ -2,32 +2,7 @@ package structure
 
 import (
 	"strconv"
-	"strings"
 )
-
-func ArrayToString(naiveArray []string) string {
-	var naiveList string
-	for _, v := range naiveArray {
-		if naiveList == "" {
-			naiveList = v
-		} else {
-			naiveList = strings.Join([]string{naiveList, v}, ",")
-		}
-	}
-	return naiveList
-}
-
-func InterfaceArrayToString(naiveArray []interface{}) string {
-	var naiveList string
-	for _, v := range naiveArray {
-		if naiveList == "" {
-			naiveList = v.(string)
-		} else {
-			naiveList = strings.Join([]string{naiveList, v.(string)}, ",")
-		}
-	}
-	return naiveList
-}
 
 func U2S(us []uint8) string {
 	var str []string

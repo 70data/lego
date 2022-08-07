@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	
+
 	"github.com/pkg/errors"
 	psutil "github.com/shirou/gopsutil/v3/process"
 )
@@ -181,7 +181,7 @@ func getProcessOccupiedPorts(pid int32) ([]int, error) {
 		}
 		occupiedPorts = append(occupiedPorts, port)
 	}
-	// One occupied port can corresponds to multiple netstat lines, so remove duplicate ports.
+	// One occupied port can corresponds to multiple netstat lines, so remove duplicate ports
 	return removeDuplicate(occupiedPorts), nil
 }
 

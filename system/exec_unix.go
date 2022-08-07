@@ -7,7 +7,7 @@ import (
 	"os/exec"
 	"syscall"
 	"time"
-	
+
 	"github.com/pkg/errors"
 	"k8s.io/klog/v2"
 )
@@ -36,26 +36,26 @@ func WaitTimeout(c *exec.Cmd, timeout time.Duration) error {
 			}
 		})
 	})
-	
+
 	err := c.Wait()
-	
+
 	// Shutdown all timers
 	if kill != nil {
 		kill.Stop()
 	}
 	termSent := !term.Stop()
-	
+
 	// If the process exited without error treat it as success
 	// This allows a process to do a clean shutdown on signal
 	if err == nil {
 		return nil
 	}
-	
+
 	// If SIGTERM was sent then treat any process error as a timeout
 	if termSent {
 		return TimeoutErr
 	}
-	
+
 	// Otherwise there was an error unrelated to termination
 	return err
 }

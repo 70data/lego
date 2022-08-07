@@ -1,4 +1,4 @@
-module github.com/70data/utils
+module github.com/cloudnative-tesseract/lego
 
 go 1.17
 

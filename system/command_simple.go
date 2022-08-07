@@ -2,7 +2,7 @@ package system
 
 import (
 	"os/exec"
-	
+
 	"k8s.io/klog/v2"
 )
 

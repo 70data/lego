@@ -79,7 +79,7 @@ func ErrMini(err error) {
 	)
 }
 
-// combine raw error info and rawStack error info in the base error and return as a new error
+// ErrMiniInfo combine raw error info and rawStack error info in the base error and return as a new error
 func ErrMiniInfo(err error) error {
 	e := Wrap(err, 0)
 	newErr := errors.New(fmt.Sprintf("%s\n|------------------ %s\n", e.Error(), e.RawStackMini()))
@@ -95,8 +95,8 @@ func Wrap(err error, fmtAndArgs ...interface{}) *XErr {
 	return WrapDepth(1, err, fmtAndArgs...)
 }
 
-// WrapDepth The argument depth is the number of stack frames to skip before recording in pc, with 0 identifying the caller of WrapDepth.
-// if a wrapper is added to WrapDepth, depth should +1, like Wrap.
+// WrapDepth The argument depth is the number of stack frames to skip before recording in pc, with 0 identifying the caller of WrapDepth
+// if a wrapper is added to WrapDepth, depth should +1, like Wrap
 func WrapDepth(depth int, err error, fmtAndArgs ...interface{}) *XErr {
 	msg := fmtErrMsg(fmtAndArgs...)
 	if err == nil {

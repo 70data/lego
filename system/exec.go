@@ -7,7 +7,7 @@ import (
 	"os/user"
 	"strings"
 	"time"
-	
+
 	"github.com/pkg/errors"
 	"k8s.io/klog/v2"
 )
@@ -54,7 +54,7 @@ func (c *command) Execute() (*ExecuteResult, error) {
 	return executeResult, executeResult.AsError()
 }
 
-// ExecuteAllowFailure the given command, allow the command to failed (exits with non-zero code).
+// ExecuteAllowFailure the given command, allow the command to failed (exits with non-zero code)
 func (c *command) ExecuteAllowFailure() (*ExecuteResult, error) {
 	return c.execute(info)
 }
